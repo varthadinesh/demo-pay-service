@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Partner Login — OntmPay</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="container">
+    <nav class="main">
+      <a href="index.html" class="logo"><span class="mark">SP</span> OntmPay</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="services/bbps.html">BBPS</a>
+        <a href="services/education.html">Education Fees</a>
+        <a href="services/insurance.html">Insurance</a>
+        <a href="services/ferry.html">Ferry Booking</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="nav-cta">
+        <a href="login.html" class="btn btn-primary btn-sm">Partner Login</a>
+      </div>
+      <button class="nav-toggle btn btn-ghost btn-sm" aria-label="Menu">☰</button>
+    </nav>
+  </div>
+</header>
+
+<section class="tight">
+  <div class="container" style="max-width:560px;">
+    <div class="section-head left">
+      <div class="eyebrow">Demo login</div>
+      <h1 style="font-size:1.9rem;">Sign in to your partner dashboard</h1>
+      <p>This is a static demo — pick a role below to see how the dashboard looks for that tier. No real account is created.</p>
+    </div>
+
+    <form class="form-card" id="login-form">
+      <label>Choose your role</label>
+      <div class="role-tiles" id="role-tiles">
+        <button type="button" class="role-tile active" data-role="super">
+          <b>Super Distributor</b>
+          <span>State-level, manages distributors</span>
+        </button>
+        <button type="button" class="role-tile" data-role="distributor">
+          <b>Distributor</b>
+          <span>District-level, manages retailers</span>
+        </button>
+        <button type="button" class="role-tile" data-role="retailer">
+          <b>Retailer</b>
+          <span>Counter-level, serves customers</span>
+        </button>
+      </div>
+
+      <div class="field">
+        <label for="name">Your name</label>
+        <input type="text" id="name" placeholder="e.g. Ramesh Kumar" value="Ramesh Kumar" required>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="mobile">Mobile number</label>
+          <input type="tel" id="mobile" placeholder="98765 43210" value="9876543210" pattern="[0-9]{10}" maxlength="10">
+        </div>
+        <div class="field">
+          <label for="pin">Login PIN</label>
+          <input type="password" id="pin" placeholder="••••" value="1234" maxlength="6">
+        </div>
+      </div>
+      <p class="hint">Demo credentials are pre-filled — this form doesn't check them against anything real.</p>
+      <button type="submit" class="btn btn-primary btn-block mt-16">Sign in to dashboard</button>
+      <p class="hint text-center mt-16 mb-0">New partner? <a href="contact.html" style="color:var(--primary); font-weight:600;">Apply to join the network →</a></p>
+    </form>
+  </div>
+</section>
+
+<footer class="site" style="margin-top:40px;">
+  <div class="container footer-bottom" style="margin-top:0; border-top:none; padding-top:0;">
+    <span>© 2026 OntmPay Technologies. Demo site — not a licensed payment aggregator.</span>
+    <a href="index.html" style="color:#AEB9D1;">Back to home</a>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  let selectedRole = "super";
+  document.querySelectorAll(".role-tile").forEach((tile) => {
+    tile.addEventListener("click", () => {
+      document.querySelectorAll(".role-tile").forEach((t) => t.classList.remove("active"));
+      tile.classList.add("active");
+      selectedRole = tile.dataset.role;
+    });
+  });
+
+  document.getElementById("login-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const name = document.getElementById("name").value.trim() || "Demo User";
+    window.location.href = `dashboard.html?role=${selectedRole}&name=${encodeURIComponent(name)}`;
+  });
+</script>
+</body>
+</html>
