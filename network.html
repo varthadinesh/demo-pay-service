@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Network — OnTmPay</title>
+<link rel="stylesheet" href="css/style.css?v=20260717c">
+</head>
+<body>
+
+<header class="site">
+  <div class="container">
+    <nav class="main">
+      <a href="index.html" class="logo"><span class="mark"><img src="./assets/images/ontmpay-logo.jpeg" alt="OT"></span> OnTmPay</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="services/bbps.html">BBPS</a>
+        <a href="services/education.html">Education Fees</a>
+        <a href="services/insurance.html">Insurance</a>
+        <a href="services/ferry.html">Ferry Booking</a>
+      </div>
+      <div class="nav-cta">
+        <span class="badge gold"><span data-role-label>Role</span></span>
+        <a href="login.html" class="btn btn-outline btn-sm">Log out</a>
+      </div>
+      <button class="nav-toggle btn btn-ghost btn-sm" aria-label="Menu">☰</button>
+    </nav>
+  </div>
+</header>
+
+<div class="dash-shell">
+  <aside class="dash-side">
+    <span class="role-badge" data-role-label>Role</span>
+    <a href="dashboard.html" data-preserve-role>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>
+      Dashboard
+    </a>
+    <a href="network.html" class="active" data-preserve-role>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="2.5"></circle><circle cx="6" cy="19" r="2.5"></circle><circle cx="18" cy="19" r="2.5"></circle><path d="M12 7.5V13M12 13L6 16.5M12 13l6 3.5"></path></svg>
+      My Network
+    </a>
+    <a href="services/bbps.html" data-preserve-role>BBPS</a>
+    <a href="services/education.html" data-preserve-role>Education Fees</a>
+    <a href="services/insurance.html" data-preserve-role>Insurance</a>
+    <a href="services/ferry.html" data-preserve-role>Ferry Booking</a>
+    <hr class="rule" style="border-color:rgba(255,255,255,.14); margin:14px 0;">
+    <a href="login.html">Log out</a>
+  </aside>
+
+  <main class="dash-main">
+    <div class="dash-head">
+      <div>
+        <div class="eyebrow">Downline</div>
+        <h2 style="margin-bottom:0;">My network</h2>
+        <p class="mb-0" style="font-size:.88rem;">Everyone onboarded beneath your tier, and what they're moving.</p>
+      </div>
+      <button class="btn btn-primary btn-sm" id="open-add-partner">+ Add Partner</button>
+    </div>
+
+    <div id="retailer-notice" class="card" style="display:none; background:var(--danger-soft); border-color:var(--danger);">
+      <p class="mb-0">Retailers don't manage a downline in OnTmPay — this page is for Distributors and Super Distributors. <a href="dashboard.html" data-preserve-role style="color:var(--primary); font-weight:600;">Back to your dashboard →</a></p>
+    </div>
+
+    <div id="tree-wrap">
+      <div class="tabs">
+        <div class="tab active" data-tab="tree">Hierarchy view</div>
+        <div class="tab" data-tab="table">Table view</div>
+      </div>
+
+      <div id="tab-tree">
+        <div class="tree-row" style="border-color:var(--accent-deep); background:#FFFBF0;">
+          <div class="who">
+            <div class="avatar" style="background:var(--accent); color:#fff;">SD</div>
+            <div>
+              <b data-user-name>You</b>
+              <div class="hint mb-0">Super Distributor · Telangana Region</div>
+            </div>
+          </div>
+          <span class="badge gold mono">₹4,82,300</span>
+        </div>
+
+        <div class="tree-level">
+          <div class="tree-row">
+            <div class="who">
+              <div class="avatar">D1</div>
+              <div><b>Lakshmi Distributors</b><div class="hint mb-0">Distributor · Hyderabad Zone</div></div>
+            </div>
+            <span class="badge grey mono">₹96,400</span>
+          </div>
+          <div class="tree-level">
+            <div class="tree-row"><div class="who"><div class="avatar">R</div><div><b>Sai General Store</b><div class="hint mb-0">Retailer · Ameerpet</div></div></div><span class="badge grey mono">₹8,250</span></div>
+            <div class="tree-row"><div class="who"><div class="avatar">R</div><div><b>Krishna Mobiles</b><div class="hint mb-0">Retailer · Kukatpally</div></div></div><span class="badge grey mono">₹5,120</span></div>
+          </div>
+
+          <div class="tree-row">
+            <div class="who">
+              <div class="avatar">D2</div>
+              <div><b>Venkata Distributors</b><div class="hint mb-0">Distributor · Warangal Zone</div></div>
+            </div>
+            <span class="badge grey mono">₹61,750</span>
+          </div>
+          <div class="tree-level">
+            <div class="tree-row"><div class="who"><div class="avatar">R</div><div><b>New Bharat Kirana</b><div class="hint mb-0">Retailer · Warangal Town</div></div></div><span class="badge grey mono">₹3,910</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-table" style="display:none;">
+        <table class="ledger">
+          <thead><tr><th>Name</th><th>Role</th><th>Region</th><th class="mono">Wallet</th><th class="mono">This month</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Lakshmi Distributors</td><td>Distributor</td><td>Hyderabad Zone</td><td class="mono">₹96,400</td><td class="mono">₹2,14,000</td><td><span class="badge">Active</span></td></tr>
+            <tr><td>Venkata Distributors</td><td>Distributor</td><td>Warangal Zone</td><td class="mono">₹61,750</td><td class="mono">₹1,08,200</td><td><span class="badge">Active</span></td></tr>
+            <tr><td>Sai General Store</td><td>Retailer</td><td>Ameerpet</td><td class="mono">₹8,250</td><td class="mono">₹41,900</td><td><span class="badge">Active</span></td></tr>
+            <tr><td>Krishna Mobiles</td><td>Retailer</td><td>Kukatpally</td><td class="mono">₹5,120</td><td class="mono">₹28,600</td><td><span class="badge">Active</span></td></tr>
+            <tr><td>New Bharat Kirana</td><td>Retailer</td><td>Warangal Town</td><td class="mono">₹3,910</td><td class="mono">₹19,300</td><td><span class="badge grey">Onboarding</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Add partner modal -->
+<div id="add-partner-modal" style="display:none; position:fixed; inset:0; background:rgba(14,21,38,.5); z-index:80; align-items:center; justify-content:center;">
+  <form class="form-card" style="max-width:440px; width:90%;" id="add-partner-form">
+    <div class="flex between center mb-0" style="margin-bottom:18px;">
+      <h3 style="margin-bottom:0;">Add a partner</h3>
+      <button type="button" id="close-add-partner" class="btn btn-ghost btn-sm">✕</button>
+    </div>
+    <div class="field">
+      <label for="partner-name">Full name / business name</label>
+      <input type="text" id="partner-name" placeholder="e.g. Ganesh Recharge Point" required>
+    </div>
+    <div class="field">
+      <label for="partner-role">Onboard as</label>
+      <select id="partner-role">
+        <option>Distributor</option>
+        <option selected>Retailer</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="partner-region">Region / area</label>
+      <input type="text" id="partner-region" placeholder="e.g. Miyapur" required>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">Send onboarding invite</button>
+    <p class="hint text-center mt-16 mb-0">Demo only — no invite is actually sent.</p>
+  </form>
+</div>
+
+<footer class="site" style="margin-top:0;">
+  <div class="container footer-bottom" style="margin-top:0; border-top:none; padding-top:0;">
+    <span>© 2026 OnTmPay Technologies. Demo site — not a licensed payment aggregator.</span>
+  </div>
+</footer>
+
+<script src="js/main.js?v=20260717c"></script>
+<script>
+  (function () {
+    const role = currentRole();
+    if (role === "retailer") {
+      document.getElementById("retailer-notice").style.display = "block";
+      document.getElementById("tree-wrap").style.display = "none";
+      document.getElementById("open-add-partner").style.display = "none";
+    }
+  })();
+
+  document.querySelectorAll(".tab").forEach((tab) => {
+    tab.addEventListener("click", () => {
+      document.querySelectorAll(".tab").forEach((t) => t.classList.remove("active"));
+      tab.classList.add("active");
+      document.getElementById("tab-tree").style.display = tab.dataset.tab === "tree" ? "block" : "none";
+      document.getElementById("tab-table").style.display = tab.dataset.tab === "table" ? "block" : "none";
+    });
+  });
+
+  const modal = document.getElementById("add-partner-modal");
+  document.getElementById("open-add-partner").addEventListener("click", () => modal.style.display = "flex");
+  document.getElementById("close-add-partner").addEventListener("click", () => modal.style.display = "none");
+  document.getElementById("add-partner-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    modal.style.display = "none";
+    showToast("Onboarding invite queued (demo) for " + document.getElementById("partner-name").value);
+    this.reset();
+  });
+</script>
+</body>
+</html>
