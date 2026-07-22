@@ -244,8 +244,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // and again once any injected navbar/footer partials finish loading.
   initPageChrome();
   Promise.all([
-    loadPartial("site-navbar", "../navbar.html"),
-    loadPartial("site-footer", "../footer.html"),
+    loadPartial("site-navbar", "../navbar.html?v=20260722a"),
+    loadPartial("site-footer", "../footer.html?v=20260722a"),
   ]).then(() => initPageChrome());
 
   initScrollReveal();
