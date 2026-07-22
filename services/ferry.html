@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ferry Booking — OnTmPay</title>
+<link rel="stylesheet" href="../css/style.css?v=20260717d">
+</head>
+<body data-page="ferry">
+
+<div id="site-navbar"></div>
+<section class="tight">
+  <div class="container">
+    <div class="section-head left reveal">
+      <div class="eyebrow">Ferry booking</div>
+      <h1 style="font-size:2rem;">Book a ferry ticket at the counter</h1>
+      <p>Search a route, pick a departure, and print a boarding slip — for island and river-crossing services.</p>
+    </div>
+
+    <form class="form-card" id="search-form">
+      <div class="grid grid-4" style="align-items:end;">
+        <div class="field mb-0">
+          <label for="route-from">From</label>
+          <select id="route-from">
+            <option>Test Port A</option>
+            <option>Test Port B</option>
+            <option>Test Jetty C</option>
+            <option>Test Ghat D</option>
+          </select>
+        </div>
+        <div class="field mb-0">
+          <label for="route-to">To</label>
+          <select id="route-to">
+            <option>Test Island E</option>
+            <option>Test Town F</option>
+            <option>Test Harbour G</option>
+            <option>Test Ghat H</option>
+          </select>
+        </div>
+        <div class="field mb-0">
+          <label for="travel-date">Travel date</label>
+          <input type="date" id="travel-date" value="2026-07-20">
+        </div>
+        <div class="field mb-0">
+          <label for="passengers">Passengers</label>
+          <select id="passengers">
+            <option>1</option>
+            <option selected>2</option>
+            <option>3</option>
+            <option>4</option>
+          </select>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary mt-24">Search ferries</button>
+    </form>
+
+    <div id="results" style="display:none;" class="mt-32">
+      <h3>Available departures</h3>
+      <div class="grid" style="gap:14px;">
+        <div class="card flex between center ferry-option" data-fare="450">
+          <div>
+            <b>Test Ferry One</b>
+            <p class="hint mb-0">07:30 AM · Deck &amp; cabin seating · ~40 min crossing</p>
+          </div>
+          <div class="flex center gap-16">
+            <span class="mono" style="font-size:1.1rem;">₹450 <span class="hint">/ person</span></span>
+            <button type="button" class="btn btn-outline btn-sm select-ferry">Select</button>
+          </div>
+        </div>
+        <div class="card flex between center ferry-option" data-fare="380">
+          <div>
+            <b>Test Ferry Two</b>
+            <p class="hint mb-0">10:15 AM · Open deck · ~35 min crossing</p>
+          </div>
+          <div class="flex center gap-16">
+            <span class="mono" style="font-size:1.1rem;">₹380 <span class="hint">/ person</span></span>
+            <button type="button" class="btn btn-outline btn-sm select-ferry">Select</button>
+          </div>
+        </div>
+        <div class="card flex between center ferry-option" data-fare="520">
+          <div>
+            <b>Test Ferry Three</b>
+            <p class="hint mb-0">04:00 PM · AC cabin · ~30 min crossing</p>
+          </div>
+          <div class="flex center gap-16">
+            <span class="mono" style="font-size:1.1rem;">₹520 <span class="hint">/ person</span></span>
+            <button type="button" class="btn btn-outline btn-sm select-ferry">Select</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="booking-summary" style="display:none; grid-template-columns:1.3fr 1fr;" class="grid grid-2 mt-32">
+      <div class="card">
+        <h3>Passenger details</h3>
+        <div class="field">
+          <label for="lead-name">Lead passenger name</label>
+          <input type="text" id="lead-name" placeholder="e.g. A. Fernandes" value="A. Fernandes">
+        </div>
+        <div class="field mb-0">
+          <label for="lead-mobile">Mobile number</label>
+          <input type="tel" id="lead-mobile" placeholder="98765 43210" value="9876543210" maxlength="10">
+        </div>
+      </div>
+      <div>
+        <div class="pay-summary">
+          <h3 style="color:#fff;">Fare summary</h3>
+          <div class="row"><span>Route</span><span class="mono" id="sum-route">—</span></div>
+          <div class="row"><span>Ferry</span><span class="mono" id="sum-ferry">—</span></div>
+          <div class="row"><span>Passengers × Fare</span><span class="mono" id="sum-calc">—</span></div>
+          <div class="row total"><span>Total payable</span><span id="sum-total">₹0</span></div>
+        </div>
+        <button class="btn btn-primary btn-block mt-16" id="pay-btn">Pay &amp; confirm booking</button>
+        <p class="hint mt-16">Test mode: use card 4111 1111 1111 1111, any future expiry &amp; CVV — no real money moves.</p>
+        <div id="payment-result" class="mt-16"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script src="../js/main.js?v=20260717d"></script>
+<script src="../js/payments.js?v=20260717d"></script>
+<script>
+  let selectedFare = 0, selectedFerry = "";
+  let totalFare = 0;
+
+  document.getElementById("search-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    document.getElementById("results").style.display = "block";
+    document.getElementById("booking-summary").style.display = "none";
+    document.getElementById("results").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+
+  document.querySelectorAll(".select-ferry").forEach((btn) => {
+    btn.addEventListener("click", function () {
+      const optionCard = this.closest(".ferry-option");
+      selectedFare = Number(optionCard.dataset.fare);
+      selectedFerry = optionCard.querySelector("b").textContent;
+      const passengers = Number(document.getElementById("passengers").value);
+      totalFare = selectedFare * passengers;
+
+      document.getElementById("sum-route").textContent = document.getElementById("route-from").value + " → " + document.getElementById("route-to").value;
+      document.getElementById("sum-ferry").textContent = selectedFerry;
+      document.getElementById("sum-calc").textContent = passengers + " × ₹" + selectedFare;
+      document.getElementById("sum-total").textContent = "₹" + totalFare.toLocaleString("en-IN");
+      document.getElementById("pay-btn").textContent = "Pay ₹" + totalFare.toLocaleString("en-IN") + " & confirm booking";
+
+      document.getElementById("booking-summary").style.display = "grid";
+      document.getElementById("booking-summary").scrollIntoView({ behavior: "smooth", block: "start" });
+      showToast(selectedFerry + " selected.");
+    });
+  });
+
+  document.getElementById("pay-btn").addEventListener("click", function () {
+    if (!totalFare) {
+      showToast("Select a ferry departure first.");
+      return;
+    }
+    openRazorpayCheckout({
+      amount: totalFare,
+      description: "Ferry booking — " + selectedFerry,
+      prefillName: document.getElementById("lead-name").value || currentName(),
+      prefillContact: document.getElementById("lead-mobile").value,
+      onSuccess: function (response) {
+        document.getElementById("payment-result").innerHTML = `
+          <div class="card" style="border-color:var(--teal); background:var(--teal-soft);">
+            <b>Booking confirmed (test mode)</b>
+            <p class="mono muted mb-0" style="font-size:.82rem;">Ref: ${response.razorpay_payment_id}</p>
+          </div>`;
+        showToast("Booking confirmed — ₹" + totalFare.toLocaleString("en-IN") + " paid (test mode).");
+      },
+    });
+  });
+</script>
+</body>
+</html>

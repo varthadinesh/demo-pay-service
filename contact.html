@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us — OnTmPay</title>
+<link rel="stylesheet" href="css/style.css?v=20260717d">
+</head>
+<body data-page="contact">
+
+<div id="site-navbar"></div>
+
+<section class="tight">
+  <div class="container">
+    <div class="grid grid-2 reveal-stagger" style="grid-template-columns:1fr 1fr; gap:56px; align-items:start;">
+      <div>
+        <div class="eyebrow">Get in touch</div>
+        <h1 style="font-size:2rem;">Become a partner, or just ask a question</h1>
+        <p>Whether you want to onboard as a super distributor, distributor or retailer — or you're a customer with a transaction question — reach out below.</p>
+
+        <div class="ledger-rows mt-32">
+          <div style="padding:16px 0;">
+            <b>Partner support</b>
+            <p class="mb-0 hint">1800-123-4567 · Mon–Sat, 9 AM–8 PM</p>
+          </div>
+          <div style="padding:16px 0;">
+            <b>Email</b>
+            <p class="mb-0 hint">hello@ontmpay.example</p>
+          </div>
+          <div style="padding:16px 0;">
+            <b>Head office</b>
+            <p class="mb-0 hint">Hyderabad, Telangana, India</p>
+          </div>
+        </div>
+      </div>
+
+      <form class="form-card" id="contact-form">
+        <div class="field">
+          <label for="c-name">Full name</label>
+          <input type="text" id="c-name" placeholder="Your name" required>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="c-mobile">Mobile number</label>
+            <input type="tel" id="c-mobile" placeholder="98765 43210" maxlength="10" required>
+          </div>
+          <div class="field">
+            <label for="c-interest">I'm interested in</label>
+            <select id="c-interest">
+              <option>Becoming a Super Distributor</option>
+              <option>Becoming a Distributor</option>
+              <option>Becoming a Retailer</option>
+              <option>General enquiry</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="c-city">City / town</label>
+          <input type="text" id="c-city" placeholder="e.g. Hyderabad" required>
+        </div>
+        <div class="field">
+          <label for="c-message">Message (optional)</label>
+          <textarea id="c-message" rows="4" placeholder="Tell us a bit about your business or query"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Send enquiry</button>
+        <p class="hint text-center mt-16 mb-0">Demo form — no message is actually sent anywhere.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="js/main.js?v=20260717d"></script>
+<script>
+  document.getElementById("contact-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    showToast("Thanks! Our onboarding team will reach out shortly (demo only).");
+    this.reset();
+  });
+</script>
+</body>
+</html>
